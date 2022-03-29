@@ -289,6 +289,11 @@ namespace cppwin32
             {
                 write("::win32::guid");
             }
+            // If use struct Window::Win32::Com::HRESULT will cause ABI compatibility problems.
+            else if (type.TypeNamespace() == "Windows.Win32.Com" && type.TypeName() == "HRESULT")
+            {
+                write("int32_t");
+            }
             else if (is_nested(type))
             {
                 write(type.TypeName());
